@@ -17,3 +17,7 @@ output "cluster_id" {
 output "cluster_endpoint" {
   value = module.eks.cluster_endpoint
 }
+
+output "ecr_repo_name" {
+  value = module.ecr.repo_name
+}

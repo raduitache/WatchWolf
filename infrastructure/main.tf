@@ -22,3 +22,9 @@ module "kinesis-firehose" {
 
   tags = local.env["tags"]
 }
+
+module "ecr" {
+  source = "./ecr"
+
+  tags = local.env["tags"]
+}
