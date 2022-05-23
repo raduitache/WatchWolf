@@ -3,11 +3,6 @@ variable "private_subnets" {
   description = "The list of private subnets to use for database, because needed"
 }
 
-variable "database_subnets" {
-  type        = list(string)
-  description = "The list of database subnets to use for database, because needed"
-}
-
 variable "vpc_id" {
   type        = string
   description = "The ID of the VPC where the cluster will reside"

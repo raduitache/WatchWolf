@@ -13,11 +13,6 @@ variable "private_subnets" {
   description = "The list of CIDR ranges for private subnets"
 }
 
-variable "database_subnets" {
-  type        = list(string)
-  description = "The list of CIDR ranges for database subnets"
-}
-
 variable "availability_zones" {
   type        = list(string)
   description = "The list of availability zones where to deploy subnets"
