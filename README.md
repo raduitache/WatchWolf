@@ -15,6 +15,7 @@
 combine both data collection and data visualization into a single tool. 
 Leveraging the cloud for our infrastructure, we provide resiliency and
 performance to our customers.</p>
+<p align="right"><sub>By Copou Rogue Army Studio</sub></p>
 
 ---
 # More information
