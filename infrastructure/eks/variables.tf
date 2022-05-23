@@ -1,6 +1,6 @@
-variable "private_subnets" {
+variable "public_subnets" {
   type        = list(string)
-  description = "The list of private subnets where the EKS cluster will reside"
+  description = "The list of public subnets where the EKS cluster will reside"
 }
 
 variable "tags" {

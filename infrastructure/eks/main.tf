@@ -29,11 +29,11 @@ module "eks" {
   cluster_name      = "${var.tags["Project"]}-${var.tags["Environment"]}-${var.tags["Creator"]}-${local.app_role}"
   cluster_version   = "1.22"
   vpc_id            = var.vpc_id
-  subnets           = var.private_subnets
+  subnets           = var.public_subnets
   workers_role_name = "${var.tags["Project"]}-${var.tags["Environment"]}-${var.tags["Creator"]}-${local.worker_name}"
 
   cluster_endpoint_private_access = true
-  cluster_endpoint_public_access  = false
+  cluster_endpoint_public_access  = true
 
   worker_groups = [
     {
