@@ -16,3 +16,9 @@ module "eks" {
   cidr_range      = local.env["vpc"]["cidr_range"]
   tags            = local.env["tags"]
 }
+
+module "kinesis-firehose" {
+  source = "./firehose"
+
+  tags = local.env["tags"]
+}
