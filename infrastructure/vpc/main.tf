@@ -8,6 +8,8 @@ module "vpc" {
   azs             = var.availability_zones
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
+  database_subnets = var.database_subnets
+  create_database_subnet_group = true
 
   enable_nat_gateway     = true
   single_nat_gateway     = true
@@ -17,7 +19,18 @@ module "vpc" {
   tags = merge(
     var.tags,
     {
-      ApplicationRole = "${local.app_role}"
+      ApplicationRole                             = "${local.app_role}"
+      "kubernetes.io/cluster/${var.cluster_name}" = "shared"
     }
   )
+
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                    = "1"
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"           = "1"
+  }
 }
