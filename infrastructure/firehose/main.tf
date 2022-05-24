@@ -27,6 +27,24 @@ resource "aws_s3_bucket" "bucket" {
   bucket = "${var.tags["Project"]}-${var.tags["Environment"]}-${var.tags["Creator"]}-${local.app_role}-bucket"
 }
 
+resource "aws_iam_policy" "s3_policy" {
+  name = "AllowWatchWolfS3Access"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = [
+          "s3:*",
+          "s3-object-lambda:*"
+        ]
+        Effect   = "Allow"
+        Resource = "${aws_s3_bucket.bucket.arn}"
+      },
+    ]
+  })
+}
+
 resource "aws_iam_role" "firehose_role" {
   name = "${var.tags["Project"]}-${var.tags["Environment"]}-${var.tags["Creator"]}-${local.app_role}-role"
 
@@ -45,4 +63,8 @@ resource "aws_iam_role" "firehose_role" {
   ]
 }
 EOF
+
+  managed_policy_arns = [
+    aws_iam_policy.s3_policy.arn
+  ]
 }

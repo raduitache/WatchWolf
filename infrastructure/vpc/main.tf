@@ -8,8 +8,6 @@ module "vpc" {
   azs             = var.availability_zones
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
-  database_subnets = var.database_subnets
-  create_database_subnet_group = true
 
   enable_nat_gateway     = true
   single_nat_gateway     = true

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-pod
+  template:
+    metadata:
+      labels:
+        app: frontend-pod
+    spec:
+      containers:
+      - name: frontend
+        image: 316412051370.dkr.ecr.us-east-1.amazonaws.com/watchwolf-dev-terraform-ecr-repo:frontend
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4200

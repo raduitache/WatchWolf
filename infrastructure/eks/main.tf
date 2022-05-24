@@ -1,4 +1,3 @@
-
 data "aws_eks_cluster" "cluster" {
   name = module.eks.cluster_id
 }
@@ -39,6 +38,17 @@ module "eks" {
     {
       name                          = "eks-worker-group"
       instance_type                 = "t2.medium"
+      additional_userdata           = <<EOF
+#!/bin/bash
+set -o xtrace
+/etc/eks/bootstrap.sh ${var.tags["Project"]}-${var.tags["Environment"]}-${var.tags["Creator"]}-${local.app_role}
+EOF
+      post_bootstrap_user_data = <<-EOT
+      cd /tmp
+      sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+      sudo systemctl enable amazon-ssm-agent
+      sudo systemctl start amazon-ssm-agent
+      EOT
       additional_security_group_ids = [aws_security_group.worker_group.id]
       asg_desired_capacity          = 1
     }
