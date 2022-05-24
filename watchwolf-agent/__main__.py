@@ -3,27 +3,12 @@
 from rich import print as pprint
 from utils.helpers import get_commit_hash
 import psutil
-import argparse
 import os
+import sys
 import time
 import boto3
 import base64
 import json
-
-
-service = f"""\
-[Unit]
-Description=Watchwolf service
-After=multi-user.target
-
-[Service]
-Type=simple
-Restart=always
-ExecStart=/usr/bin/python3 /usr/local/bin/watchwolf/{os.path.basename(__file__)} 
-
-[Install]
-WantedBy=multi-user.target
-"""
 
 def intro():
     """Display the intro message."""
@@ -36,24 +21,7 @@ def main():
 
     if os.geteuid() != 0:
         print("Please run as root.")
-        exit(1)
-
-    #if license:
-    #my_parser = argparse.ArgumentParser(description='Watchwolf agent')
-    #my_parser.add_argument('--license-key', action='store', type=str, required=True,  help='License key')
-    #args = my_parser.parse_args()
-    #license check here!!!
-    #add to service path --license-key {args.license_key}
-
-    if not os.path.exists('/usr/local/bin/watchwolf'):
-        os.mkdir('/usr/local/bin/watchwolf')
-        os.system(f'cp \'{__file__}\' /usr/local/bin/watchwolf/')
-        os.system(f'chmod +x \'/usr/local/bin/watchwolf/{os.path.basename(__file__)}\'')
-        with open('/usr/lib/systemd/system/watchwolf.service', 'w') as f:
-            f.write(service)
-        os.system('systemctl daemon-reload')
-        os.system('systemctl enable watchwolf.service')
-        os.system('systemctl start watchwolf.service')
+        sys.exit(1)
 
     while True:
         cpu_level = psutil.cpu_percent()
@@ -71,7 +39,6 @@ def main():
         )
         print(response)
         time.sleep(10)
-
 
 if __name__ == '__main__':
     main()
