@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './account/login/login.component';
-import { RegisterComponent } from './account/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginGuard } from './login.guard';
 const routes: Routes = [
@@ -15,19 +13,6 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     component: DashboardComponent
   },
-  {
-    path: 'account',
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      }
-    ]
-  }
 ]
 
 @NgModule({
