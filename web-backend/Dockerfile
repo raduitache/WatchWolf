@@ -1,6 +1,6 @@
 FROM node:18.1.0-alpine3.15
 
-WORKDIR /usr/share/watchwolf
+WORKDIR /usr/src/watchwolf-backend
 
 COPY *.json ./
 RUN npm ci
@@ -10,4 +10,6 @@ RUN npm run build
 RUN rm -rf src
 RUN rm *.json
 
-CMD ["node", "dist/main"]
+EXPOSE 80
+
+CMD ["node", "dist/src/main"]
