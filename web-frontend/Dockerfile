@@ -9,8 +9,9 @@ COPY src/ src/
 RUN npm run build
 # RUN rm -rf src
 # RUN rm *.json
+RUN npm install lite-server
 
 EXPOSE 4200
 
 # CMD ["node", "dist/web-frontend"]
-CMD npm run ng serve --host=0.0.0.0 --disable-host-check
+CMD npx lite-server --baseDir="dist/web-frontend" --host=0.0.0.0 --disable-host-check
