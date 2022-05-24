@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./web-server
+        working-directory: ./web-backend
 
     strategy:
       matrix:
