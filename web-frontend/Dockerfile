@@ -13,4 +13,5 @@ RUN npm run build
 EXPOSE 4200
 
 # CMD ["node", "dist/web-frontend"]
-CMD npm run ng serve --host=0.0.0.0 --disable-host-check
+# CMD npm run ng serve --host=0.0.0.0 --disable-host-check
+CMD npx ng serve --host=0.0.0.0 --disable-host-check
